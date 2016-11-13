@@ -1,0 +1,2 @@
+# cdict
+Chinese Dictionary
