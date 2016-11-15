@@ -1,11 +1,11 @@
-from Tkinter import *
+from tkinter import *
 
 ENTER_EVENT_ID = "<Return>"
 MOUSE1_EVENT_ID = "<Button-1>"
 
 def lookup(event):
-    print "event:lookup:", event.widget
-    print "looking up:", lu_input.get(), "...."
+    print ("event:lookup:", event.widget)
+    print ("looking up:", lu_input.get(), "....")
     
 root = Tk()
 root.geometry("250x150+300+300")
