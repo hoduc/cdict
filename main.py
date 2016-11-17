@@ -2,11 +2,32 @@ from tkinter import *
 
 ENTER_EVENT_ID = "<Return>"
 MOUSE1_EVENT_ID = "<Button-1>"
+DICT = []
+STATES = [VI_CN,CN_VI]
+LOOKUP_TYPE = VI_CN
 
 def lookup(event):
     print ("event:lookup:", event.widget)
     print ("looking up:", lu_input.get(), "....")
-    
+
+def loadDictModule(filename="config"):
+    dictname=""
+    dictsource={}
+    count = 0
+    with open(filename, 'r') as f:
+        for line in f:
+            if line[0] = "[":
+                if count:
+                    DICT.append((dictname,dictsource))
+                    dictsource = {}
+                dictname = line[:-1]
+                count += 1
+            else:
+                l = line.split("=")
+                dictsource[l[0]] = l[1]             
+
+loadDictModule()
+#GUI CODE
 root = Tk()
 root.geometry("250x150+300+300")
 root.title("Lookup")

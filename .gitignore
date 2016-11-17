@@ -90,6 +90,7 @@ ENV/
 
 # Emacs. Mac
 .~
+~
 
 #dict source config
 config
