@@ -16,20 +16,10 @@ def lookup(event):
     print ("looking up:", lu_input.get(), "....")
     #print(DICT[0])
     query = DICT[0][1]["sing_vi_cn"] + "=" +  urllib.parse.quote(lu_input.get().encode('utf-8'))
-    #disp_entry.insert(0,lu_input.get())
-    #print("query=",query)
-    #disp_entry.config(state=NORMAL)
-    #disp_entry.delete(0,END)
-    #disp_entry.insert(0, u"tôi")
-    #disp_entry.config(state="readonly")
 
     with urllib.request.urlopen(query) as response:
-        text = response.read().decode("utf-8")
+        text.set(response.read().decode("utf-8"))
         print(text)
-        disp_entry.config(state=NORMAL)
-        disp_entry.delete(0,END)
-        disp_entry.insert(0,text)
-        disp_entry.config(state=DISABLED)
     
 def loadDictModule(filename="config"):
     dictname=""
@@ -55,12 +45,12 @@ root.tk.call('encoding', 'system', 'utf-8') #make decoding available
 root.geometry("300x250+300+300")
 root.title("Lookup")
 
+text = StringVar()
 #displaying the result of look up
 disp_frame = Frame(root)
 disp_frame.pack(fill=BOTH, anchor=N, expand=True)
-disp_entry = Entry(disp_frame,state=DISABLED)
-disp_entry.focus_set()
-disp_entry.pack(fill=BOTH, padx=5,pady=5, expand=True)
+disp_entry = Message(disp_frame, textvariable=text)#,state=DISABLED)
+disp_entry.pack(fill=BOTH, padx=10,pady=10, expand=True)
 
 #input to the lookup
 lu_frame = Frame(root, name="lookup_frame")
@@ -73,6 +63,7 @@ lu_button.bind(MOUSE1_EVENT_ID, lookup)
 lu_input = Entry(lu_frame, name="lookup_input")
 lu_input.pack(fill=X, padx=5, pady=5)
 lu_input.bind(ENTER_EVENT_ID, lookup)
+lu_input.focus_set()
 
 root.mainloop()
 
