@@ -1,3 +1,4 @@
+
 from tkinter import *
 from tkinter.scrolledtext import *
 
@@ -42,14 +43,14 @@ loadDictModule()
 #GUI CODE
 root = Tk()
 root.tk.call('encoding', 'system', 'utf-8') #make decoding available
-root.geometry("300x250+300+300")
+#root.geometry("300x250+300+300")
 root.title("Lookup")
 
 text = StringVar()
 #displaying the result of look up
 disp_frame = Frame(root)
 disp_frame.pack(fill=BOTH, anchor=N, expand=True)
-disp_entry = Message(disp_frame, textvariable=text)#,state=DISABLED)
+disp_entry = Label(disp_frame, textvariable=text, anchor=W, justify=LEFT, wraplength=200)#,state=DISABLED)
 disp_entry.pack(fill=BOTH, padx=10,pady=10, expand=True)
 
 #input to the lookup
