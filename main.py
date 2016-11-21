@@ -19,8 +19,13 @@ def lookup(event):
     query = DICT[0][1]["sing_vi_cn"] + "=" +  urllib.parse.quote(lu_input.get().encode('utf-8'))
 
     with urllib.request.urlopen(query) as response:
-        text.set(response.read().decode("utf-8"))
-        print(text)
+        l = ""
+        for line in response.read().decode("utf-8").split("|"):
+            wd = line.strip().split("=")
+            if line:
+                word, definition = wd[0].split(":")[-1], wd[1]
+                l += word + "=>" + definition + "\n"
+        text.set(l)
     
 def loadDictModule(filename="config"):
     dictname=""
@@ -50,7 +55,7 @@ text = StringVar()
 #displaying the result of look up
 disp_frame = Frame(root)
 disp_frame.pack(fill=BOTH, anchor=N, expand=True)
-disp_entry = Label(disp_frame, textvariable=text, anchor=W, justify=LEFT, wraplength=200)#,state=DISABLED)
+disp_entry = Label(disp_frame, textvariable=text, anchor=W, justify=LEFT)#,state=DISABLED)
 disp_entry.pack(fill=BOTH, padx=10,pady=10, expand=True)
 
 #input to the lookup
